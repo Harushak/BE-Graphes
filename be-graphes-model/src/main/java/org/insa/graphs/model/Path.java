@@ -207,9 +207,7 @@ public class Path {
 
     /**
      * Compute the length of this path (in meters).
-     * 
      * @return Total length of the path (in meters).
-     * 
      *deprecated Need to be implemented.
      *FAIT
      */
@@ -218,7 +216,6 @@ public class Path {
     	for (Arc i : arcs) {
     		ret=ret+i.getLength();
     	}
-        // TODO:
         return ret;
     }
 
@@ -230,11 +227,15 @@ public class Path {
      * @return Time (in seconds) required to travel this path at the given speed (in
      *         kilometers-per-hour).
      * 
-     * @deprecated Need to be implemented.
+     * deprecated Need to be implemented.
+     * FAIT
      */
     public double getTravelTime(double speed) {
-        // TODO:
-        return 0;
+        double time=0;
+        for (Arc i : arcs) {
+        	time+=i.getTravelTime(speed);
+        }
+        return time;
     }
 
     /**
