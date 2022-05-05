@@ -221,12 +221,9 @@ public class Path {
 
     /**
      * Compute the time required to travel this path if moving at the given speed.
-     * 
      * @param speed Speed to compute the travel time.
-     * 
      * @return Time (in seconds) required to travel this path at the given speed (in
      *         kilometers-per-hour).
-     * 
      * deprecated Need to be implemented.
      * FAIT
      */
@@ -244,11 +241,15 @@ public class Path {
      * 
      * @return Minimum travel time to travel this path (in seconds).
      * 
-     * @deprecated Need to be implemented.
+     * deprecated Need to be implemented.
+     * FAIT
      */
     public double getMinimumTravelTime() {
-        // TODO:
-        return 0;
+        double minTime=0;
+        for (Arc i : arcs) {
+        	minTime+=i.getMinimumTravelTime();
+        }
+        return minTime;
     }
 
 }
