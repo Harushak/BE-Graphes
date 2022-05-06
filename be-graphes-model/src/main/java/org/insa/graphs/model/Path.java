@@ -31,11 +31,34 @@ public class Path {
 	 *                                  consecutive nodes in the list are not
 	 *                                  connected in the graph.
 	 * 
-	 * @deprecated Need to be implemented.
+	 * deprecated Need to be implemented.
 	 */
 	public static Path createFastestPathFromNodes(Graph graph, List<Node> nodes) throws IllegalArgumentException {
 		List<Arc> arcs = new ArrayList<Arc>();
-		// TODO:
+		if(nodes.size()==0) {
+			return new Path(graph);
+		}
+		
+		if (nodes.size()==1) {
+			return new Path(graph, nodes.get(0));
+		}
+		
+		for (int i=0;i<nodes.size()-1;++i) {
+			double comp = 0.0;
+			Arc bestArc = null;
+			for(Arc arc :nodes.get(i).getSuccessors()) {
+				if(arc.getDestination()==nodes.get(i+1)) {
+					if(bestArc==null||arc.getMinimumTravelTime()<comp) {
+						comp=arc.getMinimumTravelTime();
+						bestArc=arc;
+					}
+				}
+			}
+			if (bestArc==null) {
+				throw new IllegalArgumentException("Node List is not valid!");
+			}
+			arcs.add(bestArc);
+		}
 		return new Path(graph, arcs);
 	}
 
@@ -52,13 +75,39 @@ public class Path {
 	 *                                  consecutive nodes in the list are not
 	 *                                  connected in the graph.
 	 * 
-	 * @deprecated Need to be implemented.
+	 * deprecated Need to be implemented.
 	 */
 	public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes) throws IllegalArgumentException {
 		List<Arc> arcs = new ArrayList<Arc>();
-		// TODO:
+		
+		if(nodes.size()==0) {
+			return new Path(graph);
+		}
+		
+		if (nodes.size()==1) {
+			return new Path(graph, nodes.get(0));
+		}
+		
+		for (int i=0;i<nodes.size()-1;++i) {
+			double comp = 0.0;
+			Arc bestArc = null;
+			for(Arc arc :nodes.get(i).getSuccessors()) {
+				if(arc.getDestination()==nodes.get(i+1)) {
+					if(bestArc==null||arc.getLength()<comp) {
+						comp=arc.getLength();
+						bestArc=arc;
+					}
+				}
+			}
+			if (bestArc==null) {
+				throw new IllegalArgumentException("Node List is not valid!");
+			}
+			arcs.add(bestArc);
+		}
+		
 		return new Path(graph, arcs);
 	}
+		
 
 	/**
 	 * Concatenate the given paths.
