@@ -25,7 +25,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 		}
 		return ret;
 	}
-
+    
     @Override
     protected ShortestPathSolution doRun() {
         final ShortestPathData data = getInputData();
@@ -73,6 +73,10 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         	if (heapLabels.isEmpty()) {
         		return new ShortestPathSolution(data, Status.INFEASIBLE);
         	}
+        }
+        
+        if(labels[data.getDestination().getId()].getPrevious() == null) {
+        	return new ShortestPathSolution(data, Status.INFEASIBLE);
         }
         
         notifyDestinationReached(data.getDestination());
