@@ -54,7 +54,7 @@ public class Launch {
                 new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
 
         // TODO: Read the graph.
-        final Graph graph = null;
+        final Graph graph = reader.read();
 
         // Create the drawing:
         final Drawing drawing = createDrawing();
